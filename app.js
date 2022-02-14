@@ -28,6 +28,10 @@ app.get('/admin', function(req, res) {
     res.sendfile(__dirname + '/admin.html');
     });
 
+    
+app.get('*', function(req, res) {
+    res.sendfile(__dirname + '/404.html');
+    });
 
      
         // app.get('/admin/?role='{var a }'', function(req, res) {
@@ -35,6 +39,8 @@ app.get('/admin', function(req, res) {
 
         //     });
   
+
+
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)

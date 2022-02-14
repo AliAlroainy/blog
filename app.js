@@ -1,44 +1,41 @@
-var url = require("url");
-var fs = require("fs");
 
-function renderHTML(path, response) {
-  fs.readFile(path, null, function (error, data) {
-    if (error) {
-      response.writeHead(404);
-      response.write("File not found!");
-    } else {
-      response.write(data);
-    }
-    response.end();
-  });
-}
+const express = require('express')
+const app = express()
+const port = 3000
 
-module.exports = {
-  handleRequest: function (request, response) {
-    response.writeHead(200, { "Content-Type": "text/html" });
-   
-    var path = url.parse(request.url).pathname;
-    switch (path) {
-      case "/":
-        renderHTML("./index.html", response);
-        break;
-      case "/home":
-        renderHTML("./index.html", response);
-        break;
-      case "/blog":
-        renderHTML("./index.html", response);
-        break;
-      case "/admin":
-        renderHTML("./admin.html", response);
-        break;
-      case "/login":
-        renderHTML("./login.html", response);
-        break;
+http = require('http'),
+httpServer = http.Server(app);
+
+app.use(express.static(__dirname + '/html_files'));
+
+app.get('/', function(req, res) {
+res.sendfile(__dirname + '/index.html');
+});
+
+app.get('/blog', function(req, res) {
+    res.sendfile(__dirname + '/index.html');
+    });
+
+    app.get('/home', function(req, res) {
+        res.sendfile(__dirname + '/index.html');
+        });
+
+app.get('/login', function(req, res) {
+res.sendfile(__dirname + '/login.html');
+});
+
+app.get('/admin', function(req, res) {
+    res.sendfile(__dirname + '/admin.html');
+    });
+
+
      
-      default:
-        response.writeHead(404);
-        response.write("Route not defined");
-        response.end();
-    }
-  },
-};
+        // app.get('/admin/?role='{var a }'', function(req, res) {
+        //     res.write(req.params);
+
+        //     });
+  
+
+app.listen(port, () => {
+  console.log(`Example app listening on port ${port}`)
+})

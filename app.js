@@ -34,10 +34,10 @@ app.get('*', function(req, res) {
     });
 
      
-        // app.get('/admin/?role='{var a }'', function(req, res) {
-        //     res.write(req.params);
+        app.get('/admin/?role={admin}', function(req, res) {
+            res.sendfile(__dirname + '/admin.html');
 
-        //     });
+            });
   
 
 

@@ -34,8 +34,12 @@ app.get('*', function(req, res) {
     });
 
      
-        app.get('/admin/?role={admin}', function(req, res) {
-            res.sendfile(__dirname + '/admin.html');
+        app.get('/admin', function(req, res) {
+            var roleName = 'admin';
+            if(req.query.hasOwnProperty('role')&&(req.query.role == roleName))
+            res.end(`welcome${roleName}`);
+            else
+            res.sendfile(__dirname + '/login.html');
 
             });
   

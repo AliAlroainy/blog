@@ -61,11 +61,14 @@ app.get('*', function(req, res) {
         res.sendfile(__dirname + '/404');
         });
 
+        app.get('/admin.html', function(req, res) {
+            res.sendfile(__dirname + '/login');
+            });
      
         app.get('/admin', function(req, res) {
             var roleName = 'admin';
             if( req.query.hasOwnProperty('role') && (req.query.role == roleName) )
-            res.end(`welcome${roleName}`);
+            res.sendfile(__dirname + '/admin');
             else
             res.sendfile(__dirname + '/login.html');
             });
